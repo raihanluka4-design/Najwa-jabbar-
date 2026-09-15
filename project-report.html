@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Online Hall Booking System | Review 1</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="nav"><div class="brand">HALL<span>BOOK</span> · REVIEW 1</div><nav>
+<a href="#problem">Problem</a><a href="#objectives">Objectives</a><a href="#scope">Scope</a><a href="#requirements">Requirements</a><a href="#modules">Modules</a><a href="#oop">OOP</a><a href="#uml">UML</a><a href="#output">Output</a><a href="#future">Future</a>
+</nav></div></header>
+
+<section class="hero"><div class="hero-inner">
+<div>
+<span class="kicker">MINI PROJECT – PBCST304 · OBJECT-ORIENTED PROGRAMMING</span>
+<h1>Online Hall<br><span>Booking System</span></h1>
+<p>Review 1 — a structured online hall booking solution demonstrating object-oriented programming concepts through a real-world booking problem.</p>
+<div class="info-grid">
+<div class="info"><small>TEAM MEMBERS</small><b>MISHAL SHAHIL · MUHAMMED ZAEEM P.A · NAJWA A · SHAHMA SHERIFF · PRANAB B MURALI</b></div>
+<div class="info"><small>GUIDE</small><b>Mrs. Shana Musthafa APV, Assistant Professor</b></div>
+<div class="info"><small>DEPARTMENT / COLLEGE</small><b>AI&ML, CET Payyanur</b></div>
+<div class="info"><small>ACADEMIC YEAR</small><b>2026–27</b></div>
+</div>
+</div>
+<div class="hero-visual"><div class="screen">
+<div class="screen-top"><strong>Hall Availability</strong><span class="screen-dot"></span></div>
+<div class="bar"></div><div class="bar short"></div>
+<div class="slots"><i class="slot active"></i><i class="slot"></i><i class="slot active"></i><i class="slot"></i><i class="slot"></i><i class="slot active"></i><i class="slot"></i><i class="slot active"></i><i class="slot"></i></div>
+</div></div>
+</div></section>
+
+<main>
+<section class="section reveal" id="problem"><div class="section-head"><span class="section-no">01 · PROBLEM STATEMENT</span><h2>Problem Statement</h2><p class="section-sub">The problem addressed by the proposed system.</p></div>
+<div class="card full"><ul>
+<li>Traditional hall booking is often managed manually through registers, calls, or messages.</li>
+<li>This can cause double bookings, scheduling conflicts, and difficulty in tracking availability.</li>
+<li>Users may not get real-time information about available halls and time slots.</li>
+<li>A computerized online system is needed to make hall booking faster, easier, and more reliable.</li>
+<li>The project demonstrates the application of OOP concepts to a real-world booking problem.</li>
+</ul></div></section>
+
+<section class="section reveal" id="objectives"><div class="section-head"><span class="section-no">02 · OBJECTIVES</span><h2>Objectives</h2></div>
+<div class="card-grid">
+<div class="card"><div class="number">01</div><h3>Develop</h3><p>Develop a simple Online Hall Booking System using OOP.</p></div>
+<div class="card"><div class="number">02</div><h3>View</h3><p>Allow users to view available halls and time slots.</p></div>
+<div class="card"><div class="number">03</div><h3>Manage bookings</h3><p>Enable users to book, update, and cancel hall reservations.</p></div>
+<div class="card"><div class="number">04</div><h3>Avoid conflicts</h3><p>Avoid duplicate bookings and scheduling conflicts.</p></div>
+<div class="card"><div class="number">05</div><h3>Administration</h3><p>Provide administrators with tools to manage halls and bookings.</p></div>
+<div class="card"><div class="number">06</div><h3>Demonstrate OOP</h3><p>Demonstrate Classes & Objects, Encapsulation, Inheritance, Polymorphism, and Abstraction.</p></div>
+</div></section>
+
+<section class="section reveal" id="scope"><div class="section-head"><span class="section-no">03 · SCOPE</span><h2>Scope of the Project</h2></div>
+<div class="card-grid">
+<div class="card"><h3>User registration and login</h3><p>Registration and login functionality for users.</p></div>
+<div class="card"><h3>Hall information</h3><p>View hall details, capacity, facilities, and availability.</p></div>
+<div class="card"><h3>Hall search</h3><p>Search halls by date, time, capacity, or type.</p></div>
+<div class="card"><h3>Booking management</h3><p>Create, update, and cancel bookings.</p></div>
+<div class="card"><h3>Admin management</h3><p>Admin management of halls, users, and reservations.</p></div>
+<div class="card"><h3>Reports</h3><p>Generate basic booking and availability reports.</p></div>
+<div class="card full"><span class="pill">TARGET</span><p>Suitable for college/class-level halls and small institutions.</p></div>
+</div></section>
+
+<section class="section reveal" id="requirements"><div class="section-head"><span class="section-no">04 · REQUIREMENTS</span><h2>Software & Hardware Requirements</h2></div>
+<div class="requirements">
+<div class="card req"><h3><span class="req-icon">S</span> SOFTWARE</h3><ul><li>OS: Windows / Linux</li><li>Language: Java</li><li>IDE: IntelliJ / Eclipse / VS Code / NetBeans</li><li>Database: MySQL / SQLite (if used)</li></ul></div>
+<div class="card req"><h3><span class="req-icon">H</span> HARDWARE</h3><ul><li>Intel i3 or equivalent processor</li><li>4 GB RAM or above</li><li>10 GB free storage</li><li>Keyboard, mouse and monitor</li></ul></div>
+</div></section>
+
+<section class="section reveal" id="modules"><div class="section-head"><span class="section-no">05 · MODULES</span><h2>Modules of the Project</h2></div>
+<div class="modules">
+<div class="module"><strong>01</strong><h3>User Module</h3><p>Register, login, and manage user details.</p></div>
+<div class="module"><strong>02</strong><h3>Hall Module</h3><p>Add, view, update, and delete hall information.</p></div>
+<div class="module"><strong>03</strong><h3>Availability Module</h3><p>Check halls and available time slots.</p></div>
+<div class="module"><strong>04</strong><h3>Booking Module</h3><p>Create, update, and cancel reservations.</p></div>
+<div class="module"><strong>05</strong><h3>Admin Module</h3><p>Manage users, halls, and bookings.</p></div>
+<div class="module"><strong>06</strong><h3>Report Module</h3><p>Display booking and availability summaries.</p></div>
+</div></section>
+
+<section class="section reveal" id="oop"><div class="section-head"><span class="section-no">06 · OOP CONCEPTS</span><h2>OOP Concepts Used</h2></div>
+<div class="oop">
+<div class="card"><h3>Class</h3><p>User, Hall, Booking, HallManager, etc.</p></div>
+<div class="card"><h3>Object</h3><p>Individual users, halls, and booking objects.</p></div>
+<div class="card"><h3>Encapsulation</h3><p>Keep data private and access it through methods.</p></div>
+<div class="card"><h3>Inheritance</h3><p>Specialized user or hall classes can inherit common properties.</p></div>
+<div class="card"><h3>Polymorphism</h3><p>The same method can behave differently for different objects.</p></div>
+<div class="card full"><h3>Abstraction</h3><p>Hide unnecessary implementation details from users.</p></div>
+</div></section>
+
+<section class="section reveal" id="uml"><div class="section-head"><span class="section-no">07 · UML</span><h2>UML – Use Case Diagram</h2><p class="section-sub">Actors: User, Admin</p></div>
+<div class="diagram-wrap">
+<div class="usecases">
+<div><div class="diagram-title">USER</div><div class="case-list">
+<span class="case">Register / Login</span><span class="case">View Halls</span><span class="case">Search Hall</span><span class="case">Check Availability</span><span class="case">Book Hall</span><span class="case">View Booking</span><span class="case">Update Booking</span><span class="case">Cancel Booking</span><span class="case">Logout</span>
+</div></div>
+<div><div class="diagram-title">ADMIN</div><div class="case-list">
+<span class="case">Login</span><span class="case">Manage Users</span><span class="case">Manage Halls</span><span class="case">Manage Bookings</span><span class="case">Generate Reports</span><span class="case">Logout</span>
+</div></div>
+</div></div></section>
+
+<section class="section reveal"><div class="section-head"><span class="section-no">08 · CLASS DIAGRAM</span><h2>UML – Class Diagram</h2><p class="section-sub">Suggested classes and their members/methods.</p></div>
+<div class="diagram-wrap"><div class="uml">
+<div class="uml-box"><div class="uml-head">User</div><ul><li>− userId</li><li>− name</li><li>− email</li><li>− phone</li><li>Methods: register(), login(), viewBooking()</li></ul></div>
+<div class="relation">interacts<br>with</div>
+<div class="uml-box"><div class="uml-head">Hall</div><ul><li>− hallId</li><li>− hallName</li><li>− capacity</li><li>− location</li><li>− facilities</li><li>Methods: addHall(), updateHall(), checkAvailability()</li></ul></div>
+</div>
+<div class="uml" style="margin-top:20px"><div class="uml-box"><div class="uml-head">Booking</div><ul><li>− bookingId</li><li>− userId</li><li>− hallId</li><li>− date</li><li>− timeSlot</li><li>Methods: createBooking(), updateBooking(), cancelBooking()</li></ul></div><div class="relation">linked<br>to</div><div class="uml-box"><div class="uml-head">Other classes</div><ul><li>HallManager</li><li>Report</li></ul></div></div>
+</div></section>
+
+<section class="section reveal"><div class="section-head"><span class="section-no">09 · ACTIVITY DIAGRAM</span><h2>UML – Activity Diagram</h2></div>
+<div class="diagram-wrap"><div class="flow">
+<div class="flow-step">START</div><div class="arrow">↓</div>
+<div class="flow-step">Login / Register</div><div class="arrow">↓</div>
+<div class="flow-step">Display Menu</div><div class="arrow">↓</div>
+<div class="flow-step">Search Hall / Check Availability</div><div class="arrow">↓</div>
+<div class="flow-step">Select Hall → Select Date & Time</div><div class="arrow">↓</div>
+<div class="flow-step">Validate Availability</div><div class="arrow">↓</div>
+<div class="decision"><span>Available?</span></div>
+<div class="branches"><div class="branch"><b>YES</b><div class="arrow">↓</div><div class="flow-step">Confirm Booking → Store Booking</div></div><div class="branch"><b>NO</b><div class="arrow">↓</div><div class="flow-step">Choose Another Slot</div></div></div>
+<div class="arrow">↓</div><div class="flow-step">Display Booking Confirmation</div><div class="arrow">↓</div>
+<div class="flow-step">View / Update / Cancel Booking</div><div class="arrow">↓</div><div class="flow-step">Logout → END</div>
+</div></div></section>
+
+<section class="section reveal"><div class="section-head"><span class="section-no">10 · COMPLETE RELATIONSHIPS</span><h2>UML Class Diagram – Complete Class Relationships</h2></div>
+<div class="diagram-wrap">
+<div class="uml">
+<div class="uml-box"><div class="uml-head">User</div><ul><li>− userId : int</li><li>− name : String</li><li>− email : String</li><li>− phone : String</li><li>+ register()</li><li>+ login()</li><li>+ viewBooking()</li></ul></div>
+<div class="relation">makes</div>
+<div class="uml-box"><div class="uml-head">Booking</div><ul><li>− bookingId : int</li><li>− userId : int</li><li>− hallId : int</li><li>− date : String</li><li>− timeSlot : String</li><li>+ createBooking()</li><li>+ updateBooking()</li><li>+ cancelBooking()</li></ul></div>
+</div>
+<div class="uml" style="margin-top:18px"><div class="uml-box"><div class="uml-head">Hall</div><ul><li>− hallId : int</li><li>− hallName : String</li><li>− capacity : int</li><li>− location : String</li><li>+ addHall()</li><li>+ updateHall()</li><li>+ checkAvailability()</li></ul></div>
+<div class="relation">has</div>
+<div class="uml-box"><div class="uml-head">Report</div><ul><li>− reportId : int</li><li>− bookingId : int</li><li>+ generate()</li><li>+ display()</li></ul></div>
+</div>
+<div class="relationships"><div class="rel">User 1 ─── makes ─── 0..* Bookings</div><div class="rel">Hall 1 ─── has ─── 0..* Bookings</div><div class="rel">Booking ─── generates ─── Report</div></div>
+<p style="color:#667085;font-size:13px;margin-bottom:0">The diagram connects the major classes used in the proposed Online Hall Booking System. User creates bookings, each booking is linked to one hall, and reports summarize booking information.</p>
+</div></section>
+
+<section class="section reveal" id="output"><div class="section-head"><span class="section-no">11 · EXPECTED OUTPUT</span><h2>Expected Output</h2></div>
+<div class="card-grid">
+<div class="card"><h3>User-friendly interface</h3><p>User-friendly online booking interface.</p></div>
+<div class="card"><h3>Authentication</h3><p>Successful user registration and login.</p></div>
+<div class="card"><h3>Availability</h3><p>Display of hall details and real-time availability.</p></div>
+<div class="card"><h3>Conflict-free booking</h3><p>Successful hall booking without duplicate reservations.</p></div>
+<div class="card"><h3>Confirmation</h3><p>Booking confirmation with hall, date, and time.</p></div>
+<div class="card"><h3>Booking controls</h3><p>Easy update and cancellation of bookings.</p></div>
+<div class="card"><h3>Admin view</h3><p>Admin view for managing halls and reservations.</p></div>
+<div class="card"><h3>Reports</h3><p>Basic booking and availability reports.</p></div>
+</div></section>
+
+<section class="section reveal" id="future"><div class="section-head"><span class="section-no">12 · FUTURE ENHANCEMENTS</span><h2>Future Enhancements</h2></div>
+<div class="card-grid">
+<div class="card"><h3>01 · Online payment</h3><p>Online payment integration.</p></div>
+<div class="card"><h3>02 · Notifications</h3><p>Email/SMS booking confirmations and reminders.</p></div>
+<div class="card"><h3>03 · QR confirmation</h3><p>QR-code based booking confirmation.</p></div>
+<div class="card"><h3>04 · Role-based access</h3><p>Role-based authentication and access control.</p></div>
+<div class="card"><h3>05 · Calendar</h3><p>Calendar integration and automated conflict detection.</p></div>
+<div class="card"><h3>06 · Cloud</h3><p>Cloud database and backup.</p></div>
+<div class="card"><h3>07 · Applications</h3><p>Web and mobile application.</p></div>
+<div class="card"><h3>08 · Analytics</h3><p>Analytics for hall utilization and booking trends.</p></div>
+<div class="card full"><h3>09 · College ERP</h3><p>Integration with college ERP or campus management systems.</p></div>
+</div></section>
+
+<section class="section reveal"><div class="section-head"><span class="section-no">13 · REFERENCES</span><h2>References</h2></div>
+<div class="card"><ol>
+<li>Herbert Schildt, Java: The Complete Reference.</li>
+<li>E. Balagurusamy, Programming with Java.</li>
+<li>Oracle Java Documentation.</li>
+<li>UML reference/documentation materials.</li>
+<li>MySQL Documentation (if MySQL is used).</li>
+<li>IEEE/research papers referred by the project team.</li>
+</ol></div></section>
+</main>
+<footer>Online Hall Booking System · Mini Project – PBCST304 · Review 1 · AI&ML, CET Payyanur · Academic Year 2026–27</footer>
+<script src="report-script.js"></script>
+</body>
+</html>

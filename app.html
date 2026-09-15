@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HallBook — Online Hall Booking System</title>
+<style>
+:root{
+  --navy:#0b1730;--ink:#172033;--muted:#667085;--line:#e4e7ec;
+  --bg:#f6f8fc;--card:#fff;--blue:#155eef;--blue-dark:#0e46ba;
+  --green:#079455;--green-bg:#ecfdf3;--red:#d92d20;--red-bg:#fef3f2;
+  --amber:#b54708;--amber-bg:#fffaeb;
+  --shadow:0 8px 24px rgba(16,24,40,.08);
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit}
+.hidden{display:none !important}
+
+/* ---------- Auth screen ---------- */
+#auth-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#0b1730,#123067 65%,#0b1730);padding:24px}
+.auth-box{background:var(--card);width:100%;max-width:400px;border-radius:14px;box-shadow:0 30px 70px rgba(0,0,0,.35);padding:34px 30px;position:relative;overflow:hidden}
+.auth-box:before{content:"";position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:var(--blue);opacity:.08;border-radius:50%}
+.brand{font-weight:800;font-size:20px;letter-spacing:-.02em;color:var(--navy);margin-bottom:2px}
+.brand span{color:var(--blue)}
+.auth-sub{color:var(--muted);font-size:13px;margin-bottom:22px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:600;color:#344054;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.btn{border:none;border-radius:8px;padding:10px 16px;font-size:14px;font-weight:700;transition:.15s}
+.btn-primary{background:var(--blue);color:#fff;width:100%}
+.btn-primary:hover{background:var(--blue-dark)}
+.btn-ghost{background:transparent;color:var(--blue);text-decoration:underline;padding:4px}
+.btn-outline{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+.btn-danger{background:var(--red-bg);color:var(--red)}
+.btn-danger:hover{background:#fee4e2}
+.btn-sm{padding:6px 11px;font-size:12.5px}
+.auth-toggle{text-align:center;font-size:13px;color:var(--muted);margin-top:16px}
+.auth-error{background:var(--red-bg);color:var(--red);border:1px solid #fecdca;padding:9px 12px;border-radius:8px;font-size:13px;margin-bottom:14px}
+.auth-demo{margin-top:18px;border-top:1px solid var(--line);padding-top:14px;font-size:11.5px;color:var(--muted)}
+.auth-demo code{background:#f2f4f7;padding:1px 5px;border-radius:4px}
+
+/* ---------- App shell ---------- */
+#app-screen{min-height:100vh;display:flex}
+.sidebar{width:220px;background:var(--navy);color:#cbd5e1;flex-shrink:0;display:flex;flex-direction:column;padding:22px 0}
+.sidebar .brand{color:#fff;padding:0 20px 20px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.sidebar .brand span{color:#62d8ff}
+.nav-item{display:flex;align-items:center;gap:10px;padding:11px 20px;font-size:13.5px;font-weight:600;color:#9aa7c2;border-left:3px solid transparent}
+.nav-item:hover{color:#fff;background:rgba(255,255,255,.04)}
+.nav-item.active{color:#fff;background:rgba(255,255,255,.07);border-left-color:#62d8ff}
+.nav-section-label{padding:16px 20px 6px;font-size:10.5px;font-weight:800;letter-spacing:.08em;color:#5c6a8c}
+.sidebar-footer{margin-top:auto;padding:16px 20px 0;border-top:1px solid rgba(255,255,255,.1)}
+.who{font-size:13px;color:#fff;font-weight:700}
+.who-role{font-size:11px;color:#8fdcff;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+.logout-btn{margin-top:10px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);width:100%;padding:8px;border-radius:7px;font-size:12.5px}
+.logout-btn:hover{background:rgba(255,255,255,.15)}
+
+.main{flex:1;min-width:0}
+.topbar{background:#fff;border-bottom:1px solid var(--line);padding:18px 30px;display:flex;align-items:center;justify-content:space-between}
+.topbar h1{font-size:19px;margin:0;letter-spacing:-.02em}
+.topbar p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.content{padding:26px 30px 60px;max-width:1080px}
+
+.toast{position:fixed;top:18px;right:18px;background:var(--navy);color:#fff;padding:12px 18px;border-radius:9px;font-size:13.5px;box-shadow:var(--shadow);z-index:200;opacity:0;transform:translateY(-8px);transition:.25s}
+.toast.show{opacity:1;transform:none}
+.toast.err{background:var(--red)}
+
+/* ---------- Cards / grids ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.hall-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.hall-card h3{margin:0 0 4px;font-size:16px}
+.hall-meta{font-size:12.5px;color:var(--muted);margin-bottom:10px}
+.hall-facilities{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{font-size:11px;background:#eef4ff;color:var(--blue-dark);padding:3px 8px;border-radius:999px;font-weight:600}
+.hall-card .btn{margin-top:auto}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.panel + .panel{margin-top:18px}
+.panel h2{font-size:16px;margin:0 0 16px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:10px;border-bottom:1px solid #f0f2f6;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.status{font-size:11px;font-weight:800;padding:3px 9px;border-radius:999px;text-transform:capitalize}
+.status.confirmed{background:var(--green-bg);color:var(--green)}
+.status.cancelled{background:var(--red-bg);color:var(--red)}
+.empty{color:var(--muted);font-size:13.5px;padding:20px 4px;text-align:center}
+
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:20px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:24px;letter-spacing:-.02em}
+.stat span{font-size:12px;color:var(--muted)}
+
+/* modal */
+.modal-back{position:fixed;inset:0;background:rgba(11,23,48,.5);display:flex;align-items:center;justify-content:center;z-index:150;padding:16px}
+.modal{background:#fff;border-radius:12px;max-width:440px;width:100%;padding:26px;box-shadow:0 30px 70px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+.modal h2{margin-top:0;font-size:17px}
+.modal-actions{display:flex;gap:10px;margin-top:18px}
+.modal-actions .btn{flex:1}
+.slot-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:4px}
+.slot-opt{border:1px solid var(--line);border-radius:7px;padding:9px 8px;text-align:center;font-size:12.5px;font-weight:700;cursor:pointer;background:#fff}
+.slot-opt.taken{background:#f9fafb;color:#c0c6d1;cursor:not-allowed;text-decoration:line-through}
+.slot-opt.selected{border-color:var(--blue);background:#eef4ff;color:var(--blue-dark)}
+.field-hint{font-size:12px;color:var(--muted);margin-top:4px}
+.row-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+@media(max-width:760px){
+  #app-screen{flex-direction:column}
+  .sidebar{width:100%;flex-direction:row;flex-wrap:wrap;padding:14px 16px;align-items:center}
+  .sidebar .brand{border:none;padding:0;margin:0 14px 0 0}
+  .nav-section-label{display:none}
+  .sidebar-footer{margin:0 0 0 auto;padding:0;border:none;display:flex;align-items:center;gap:10px}
+  .logout-btn{margin:0;width:auto}
+  .who{display:none}
+  .content{padding:20px 16px 50px}
+  .topbar{padding:16px}
+  .two-col{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ AUTH SCREEN ============ -->
+<div id="auth-screen">
+  <div class="auth-box">
+    <div class="brand">HALL<span>BOOK</span></div>
+    <div class="auth-sub" id="auth-sub">Sign in to book a hall</div>
+    <div id="auth-error" class="auth-error hidden"></div>
+
+    <!-- LOGIN FORM -->
+    <form id="login-form">
+      <div class="field"><label>Email</label><input type="email" id="login-email" required placeholder="you@college.edu"></div>
+      <div class="field"><label>Password</label><input type="password" id="login-password" required placeholder="••••••••"></div>
+      <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+
+    <!-- REGISTER FORM -->
+    <form id="register-form" class="hidden">
+      <div class="field"><label>Full name</label><input type="text" id="reg-name" required placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input type="email" id="reg-email" required placeholder="you@college.edu"></div>
+      <div class="field"><label>Phone</label><input type="tel" id="reg-phone" placeholder="Optional"></div>
+      <div class="field"><label>Password</label><input type="password" id="reg-password" required minlength="4" placeholder="At least 4 characters"></div>
+      <button class="btn btn-primary" type="submit">Create account</button>
+    </form>
+
+    <div class="auth-toggle">
+      <span id="toggle-to-register">Don't have an account? <a href="#" class="btn-ghost" id="show-register">Register</a></span>
+      <span id="toggle-to-login" class="hidden">Already have an account? <a href="#" class="btn-ghost" id="show-login">Sign in</a></span>
+    </div>
+
+    <div class="auth-demo">
+      Admin demo login — email <code>admin@hallbook.app</code>, password <code>admin123</code>. Data is saved only in this browser.
+    </div>
+  </div>
+</div>
+
+<!-- ============ APP SCREEN ============ -->
+<div id="app-screen" class="hidden">
+  <div class="sidebar">
+    <div class="brand">HALL<span>BOOK</span></div>
+    <div class="nav-section-label">Menu</div>
+    <div class="nav-item active" data-view="browse">Browse Halls</div>
+    <div class="nav-item" data-view="mybookings">My Bookings</div>
+    <div class="nav-item hidden" data-view="admin-halls" id="nav-admin-halls">Manage Halls</div>
+    <div class="nav-item hidden" data-view="admin-bookings" id="nav-admin-bookings">All Bookings</div>
+    <div class="nav-item hidden" data-view="admin-reports" id="nav-admin-reports">Reports</div>
+    <div class="sidebar-footer">
+      <div class="who" id="who-name">—</div>
+      <div class="who-role" id="who-role">—</div>
+      <button class="logout-btn" id="logout-btn">Log out</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <h1 id="view-title">Browse Halls</h1>
+        <p id="view-sub">Find a hall and check live availability.</p>
+      </div>
+    </div>
+    <div class="content">
+
+      <!-- BROWSE HALLS -->
+      <div id="view-browse" class="view">
+        <div class="grid" id="hall-grid"></div>
+      </div>
+
+      <!-- MY BOOKINGS -->
+      <div id="view-mybookings" class="view hidden">
+        <div class="panel">
+          <table>
+            <thead><tr><th>Hall</th><th>Date</th><th>Time</th><th>Purpose</th><th>Status</th><th></th></tr></thead>
+            <tbody id="mybookings-body"></tbody>
+          </table>
+          <div id="mybookings-empty" class="empty hidden">You haven't booked a hall yet.</div>
+        </div>
+      </div>
+
+      <!-- ADMIN: MANAGE HALLS -->
+      <div id="view-admin-halls" class="view hidden">
+        <div class="panel">
+          <h2 id="hall-form-title">Add a hall</h2>
+          <form id="hall-form">
+            <input type="hidden" id="hall-edit-id">
+            <div class="two-col">
+              <div class="field"><label>Hall name</label><input type="text" id="hall-name" required></div>
+              <div class="field"><label>Capacity</label><input type="number" id="hall-capacity" required min="1"></div>
+            </div>
+            <div class="two-col">
+              <div class="field"><label>Location</label><input type="text" id="hall-location" required></div>
+              <div class="field"><label>Facilities (comma separated)</label><input type="text" id="hall-facilities" placeholder="Projector, AC, Mic"></div>
+            </div>
+            <div class="row-actions">
+              <button class="btn btn-primary" type="submit" style="flex:0 0 auto">Save hall</button>
+              <button class="btn btn-outline hidden" type="button" id="hall-cancel-edit">Cancel edit</button>
+            </div>
+          </form>
+        </div>
+        <div class="panel">
+          <h2>All halls</h2>
+          <table>
+            <thead><tr><th>Name</th><th>Capacity</th><th>Location</th><th>Facilities</th><th></th></tr></thead>
+            <tbody id="admin-halls-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADMIN: ALL BOOKINGS -->
+      <div id="view-admin-bookings" class="view hidden">
+        <div class="panel">
+          <table>
+            <thead><tr><th>User</th><th>Hall</th><th>Date</th><th>Time</th><th>Status</th><th></th></tr></thead>
+            <tbody id="admin-bookings-body"></tbody>
+          </table>
+          <div id="admin-bookings-empty" class="empty hidden">No bookings yet.</div>
+        </div>
+      </div>
+
+      <!-- ADMIN: REPORTS -->
+      <div id="view-admin-reports" class="view hidden">
+        <div class="stat-grid" id="report-stats"></div>
+        <div class="panel">
+          <h2>Bookings per hall</h2>
+          <table>
+            <thead><tr><th>Hall</th><th>Confirmed bookings</th><th>Cancelled</th></tr></thead>
+            <tbody id="report-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div id="booking-modal" class="modal-back hidden">
+  <div class="modal">
+    <h2 id="booking-modal-title">Book hall</h2>
+    <input type="hidden" id="booking-hall-id">
+    <input type="hidden" id="booking-edit-id">
+    <div class="field">
+      <label>Date</label>
+      <input type="date" id="booking-date">
+    </div>
+    <div class="field">
+      <label>Time slot</label>
+      <div class="slot-grid" id="booking-slot-grid"></div>
+      <div class="field-hint">Greyed-out slots are already booked for this hall and date.</div>
+    </div>
+    <div class="field">
+      <label>Purpose (optional)</label>
+      <textarea id="booking-purpose" rows="2" placeholder="e.g. Department seminar"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-outline" id="booking-cancel">Cancel</button>
+      <button class="btn btn-primary" id="booking-confirm">Confirm booking</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
